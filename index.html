@@ -4,9 +4,45 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic-Tac-Toe</title>
+    <link rel="stylesheet" type="text/css" href="../css-reset/css-reset.css" />
     <link rel="stylesheet" type="text/css" href="index.css" />
   </head>
   <body>
+    <div class="h1"><h1>Tic Tac Toe</h1></div>
+    <div class="name-input">
+      <select name="players" id="player-select1">
+        <option value="X" selected="selected">Player X</option>
+        <option value="X">Beta AI</option>
+        <option value="X">Alpha AI</option>
+      </select>
+      vs
+      <select name="players" id="player-select2">
+        <option value="O" selected="selected">Player O</option>
+        <option value="O">Beta AI</option>
+        <option value="O">Alpha AI</option>
+      </select>
+      <input type="text" name="player1" id="player1" placeholder="Name" />
+      <input type="text" name="player2" id="player2" placeholder="Name" />
+      <button class="start-button">Start</button>
+    </div>
+    <div class="score-board">
+      Score
+    </div>
+    <div class="buttons">
+      <button class="home-button">Home</button>
+    </div>
+    <div class="container">
+      <div class="box up left" data-number="0"></div>
+      <div class="box up" data-number="1"></div>
+      <div class="box up right" data-number="2"></div>
+      <div class="box left" data-number="3"></div>
+      <div class="box" data-number="4"></div>
+      <div class="box right" data-number="5"></div>
+      <div class="box bottom left" data-number="6"></div>
+      <div class="box bottom" data-number="7"></div>
+      <div class="box bottom right" data-number="8"></div>
+    </div>
+
     <script src="index.js" type="text/javascript"></script>
   </body>
 </html>

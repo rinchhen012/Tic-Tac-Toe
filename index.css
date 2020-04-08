@@ -1,0 +1,142 @@
+body {
+  background-color: rgb(37, 37, 37);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Courier New", Courier, monospace;
+  color: white;
+  user-select: none;
+}
+
+.h1 {
+  background-color: #212122;
+  position: absolute;
+  height: 100vh;
+  width: 20vh;
+  display: flex;
+  justify-content: center;
+}
+
+h1 {
+  text-align: center;
+  color: rgb(200, 198, 57);
+  text-shadow: 1px 1px 2px #c86161;
+  font-size: 60px;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
+.container {
+  display: grid;
+  position: absolute;
+  width: 500px;
+  height: 460px;
+  left: 36vw;
+  bottom: 20vh;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  cursor: pointer;
+}
+
+.box {
+  border: 3px solid rgb(134, 134, 134);
+  font-size: 120px;
+  text-align: center;
+  color: #c86161;
+}
+
+.up {
+  border-top: none;
+}
+
+.bottom {
+  border-bottom: none;
+}
+
+.right {
+  border-right: none;
+}
+
+.left {
+  border-left: none;
+}
+
+.name-input {
+  position: absolute;
+  width: 520px;
+  height: 52px;
+  left: 36vw;
+  top: 7vh;
+  visibility: initial;
+}
+
+.buttons {
+  position: absolute;
+  width: 500px;
+  height: 50px;
+  left: 36vw;
+  top: 13vh;
+  text-align: center;
+}
+
+.score-board {
+  position: absolute;
+  width: 500px;
+  height: 60px;
+  left: 36vw;
+  top: 20vh;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.start-button,
+.home-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-style: none;
+  background-color: rgb(204, 80, 58);
+  color: white;
+  font-size: 14px;
+  box-shadow: 1px 1px 3px rgb(175, 61, 33);
+  cursor: pointer;
+}
+.reset-button:focus,
+.start-button:focus,
+.home-button:focus {
+  transform: rotate(360deg);
+  transition: 0.8s;
+  outline: none;
+}
+
+#player1,
+#player2 {
+  height: 25px;
+  width: 100px;
+  outline-style: none;
+  border-style: none;
+  border-radius: 20px;
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bolder;
+  font-size: 16px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+#player-select1,
+#player-select2 {
+  height: 25px;
+  width: 80px;
+  outline-style: none;
+  border-style: none;
+  border-radius: 20px;
+  font-size: 12px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+#players {
+  outline-style: none;
+  border-style: none;
+  border-radius: 10px;
+  padding: 0 6px 0 8px;
+}
