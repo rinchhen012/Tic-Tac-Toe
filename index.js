@@ -23,6 +23,11 @@ const Gameboard = (function () {
     let p1 = playerSelect1.innerHTML;
     let p2 = playerSelect2.innerHTML;
 
+    if ((p1 === 'Beta AI' || p1 === 'Alpha AI') && (p2 === 'Beta AI' || p2 === 'Alpha AI')) {
+        AiBattle(p1, p2);
+    }
+
+
     return {
         gameBoard,
         winPattern,
@@ -55,5 +60,8 @@ const Render = function (box, playerChoice) {
 
 };
 
+const AiBattle = function (p1, p2) {
+    console.log(p1, p2);
+}
 
 
