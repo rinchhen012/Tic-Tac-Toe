@@ -32,15 +32,16 @@ h1 {
   width: 500px;
   height: 460px;
   left: 36vw;
-  bottom: 20vh;
+  bottom: 15vh;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
   cursor: pointer;
+  font-family: cursive;
 }
 
 .box {
   border: 3px solid rgb(134, 134, 134);
-  font-size: 120px;
+  font-size: 100px;
   text-align: center;
   color: #c86161;
 }
@@ -97,11 +98,12 @@ h1 {
   border-style: none;
   background-color: rgb(204, 80, 58);
   color: white;
+  font-family: cursive;
   font-size: 14px;
   box-shadow: 1px 1px 3px rgb(175, 61, 33);
   cursor: pointer;
 }
-.reset-button:focus,
+
 .start-button:focus,
 .home-button:focus {
   transform: rotate(360deg);
@@ -130,7 +132,7 @@ h1 {
   outline-style: none;
   border-style: none;
   border-radius: 20px;
-  font-size: 12px;
+  font-size: 11px;
   font-family: "Courier New", Courier, monospace;
 }
 
