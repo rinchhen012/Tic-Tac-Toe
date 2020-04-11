@@ -1,7 +1,29 @@
 'use strict';
 
-// changes player turn starting from player X
+//  player turn starting from player X
 let xTurn = true;
+
+const inputMenu = document.querySelector('.name-input');
+
+const homeBtn = document.querySelector('.home-button');
+homeBtn.addEventListener('click', () => {
+    inputMenu.style.visibility = "initial";
+    //  clears input field
+    document.getElementById('player1').value = '';
+    document.getElementById('player2').value = '';
+
+});
+const startBtn = document.querySelector('.start-button');
+startBtn.addEventListener('click', () => {
+    //  player names from input field
+    const p1Name = document.getElementById('player1').value;
+    const p2Name = document.getElementById('player2').value;
+    if (p1Name === '' || p2Name === '') {
+        alert('Please enter names to proceed')
+    } else {
+        inputMenu.style.visibility = "hidden";
+    }
+});
 
 const boxes = document.querySelectorAll(".box");
 boxes.forEach((box) => {
@@ -11,7 +33,7 @@ boxes.forEach((box) => {
     });
 });
 
-// Gameboard module is the powerhouse the game
+//  Gameboard module is the powerhouse of the game
 const Gameboard = (function () {
     const winPattern =
         [[0, 1, 2], [0, 3, 6], [1, 4, 7],
@@ -20,40 +42,47 @@ const Gameboard = (function () {
     let gameBoard = [];
     let playerSelect1 = document.getElementById('player-select1');
     let playerSelect2 = document.getElementById('player-select2');
-    let p1 = playerSelect1.innerHTML;
-    let p2 = playerSelect2.innerHTML;
-
-    if ((p1 === 'Beta AI' || p1 === 'Alpha AI') && (p2 === 'Beta AI' || p2 === 'Alpha AI')) {
-        AiBattle(p1, p2);
-    }
-
+    let p1 = playerSelect1.options[playerSelect1.selectedIndex].text;
+    let p2 = playerSelect2.options[playerSelect2.selectedIndex].text;
+    const inputMenu = document.getElementById('name-input');
 
     return {
         gameBoard,
         winPattern,
         p1,
-        p2
+        p2,
+        inputMenu
     };
 })();
 
-const Players = function (name, position) {
-
+const Players = function () {
+    //  AI vs AI
+    if ((Gameboard.p1 === 'Beta AI' || Gameboard.p1 === 'Alpha AI') &&
+        (Gameboard.p2 === 'Beta AI' || Gameboard.p2 === 'Alpha AI')) {
+        AiBattle(Gameboard.p1, Gameboard.p2);
+    }
+    //  X vs O
+    if ((Gameboard.p1 === 'Player X') && (Gameboard.p2 === 'Player O')) {
+        console.log('Player X vs Player O');
+    }
+    //  Player vs AI
+    if (((Gameboard.p1 === 'Player X') && (Gameboard.p2 === 'Beta AI'
+        || Gameboard.p2 === 'Alpha AI')) || ((Gameboard.p1 === 'Beta AI'
+            || Gameboard.p1 === 'Alpha AI') && (Gameboard.p2 === 'Player O'))) {
+        console.log('Player vs AI');
+    }
 };
 
-const DiplayController = (function () {
-
-})();
-
 const Render = function (box, playerChoice) {
-    // prevents redundancy in array
+    //  prevents redundancy in array
     if (!(Gameboard.gameBoard.includes(playerChoice))) {
         Gameboard.gameBoard.push(playerChoice);
         if (xTurn) {
-            box.innerHTML = 'X';
+            box.innerText = 'X';
             xTurn = false;
         }
         else {
-            box.innerHTML = 'O';
+            box.innerText = 'O';
             xTurn = true;
         }
     }
@@ -63,5 +92,7 @@ const Render = function (box, playerChoice) {
 const AiBattle = function (p1, p2) {
     console.log(p1, p2);
 }
+
+Players();
 
 

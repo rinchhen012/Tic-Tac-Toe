@@ -10,20 +10,32 @@
   <body>
     <div class="h1"><h1>Tic Tac Toe</h1></div>
     <div class="name-input">
-      <select name="players" id="player-select1">
+      <select name="players" id="player-select1" autocomplete="off">
         <option value="X" selected>Player X</option>
         <option value="X">Beta AI</option>
         <option value="X">Alpha AI</option>
       </select>
       vs
-      <select name="players" id="player-select2">
+      <select name="players" id="player-select2" autocomplete="off">
         <option value="O" selected>Player O</option>
         <option value="O">Beta AI</option>
         <option value="O">Alpha AI</option>
       </select>
-      <input type="text" name="player1" id="player1" placeholder="Name" />
-      <input type="text" name="player2" id="player2" placeholder="Name" />
-      <button class="start-button">Start</button>
+      <input
+        type="text"
+        name="player1"
+        id="player1"
+        placeholder="Name"
+        required
+      />
+      <input
+        type="text"
+        name="player2"
+        id="player2"
+        placeholder="Name"
+        required
+      />
+      <input type="button" value="Start" class="start-button" />
     </div>
     <div class="score-board">
       Score

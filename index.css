@@ -106,7 +106,7 @@ h1 {
 .start-button:focus,
 .home-button:focus {
   transform: rotate(360deg);
-  transition: 0.8s;
+  transition: 0.5s;
   outline: none;
 }
 
