@@ -31,7 +31,7 @@ h1 {
   width: 500px;
   height: 460px;
   left: 36vw;
-  bottom: 15vh;
+  bottom: 20vh;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-columns: 1fr 1fr 1fr;
   cursor: pointer;
