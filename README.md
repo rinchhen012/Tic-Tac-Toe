@@ -5,6 +5,9 @@ than a rock and another being undefeatable.
 
 Choose your battle wisely.
 
-Screenhots 
+Play multiplayer or watch two AI's battle eachother.
 
-![App screenshots](/)
+Screenshots
+
+![App screenshots](/screenshots/app1)
+![App screenshots](/screenshots/app2)
