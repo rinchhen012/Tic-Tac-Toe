@@ -9,5 +9,5 @@ Play multiplayer or watch two AI's battle eachother.
 
 Screenshots
 
-![App screenshots](/screenshots/app1)
-![App screenshots](/screenshots/app2)
+![App screenshots](/screenshots/app1.jpg?raw=true)
+![App screenshots](/screenshots/app2.jpg?raw=true)
