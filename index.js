@@ -9,6 +9,9 @@ const inputMenu = document.querySelector('.name-input');
 //  div that hides the container
 const hidden = document.getElementById('hidden');
 
+//  bottom display
+const bottomDisplay = document.getElementById('bottom');
+
 const homeBtn = document.querySelector('.home-button');
 homeBtn.addEventListener('click', () => {
     inputMenu.style.visibility = "initial";
@@ -25,6 +28,7 @@ homeBtn.addEventListener('click', () => {
     scoreBoard.innerText = 'Score';
     hidden.style.zIndex = 1;
     xTurn = true;
+    bottomDisplay.innerText = '';
 });
 
 const startBtn = document.querySelector('.start-button');
@@ -38,6 +42,7 @@ startBtn.addEventListener('click', () => {
         alert('Please enter unique player names to proceed')
     }
     else {
+        bottomDisplay.innerText = `${p1Name} turn`;
         inputMenu.style.visibility = "hidden";
         hidden.style.zIndex = -1;
     }
@@ -211,11 +216,14 @@ const PlayerVsPlayer = function () {
         tieCounter = 0,
         round = 1;
 
+    const p1Name = document.getElementById('player1').value;
+    const p2Name = document.getElementById('player2').value;
+
+    if (xTurn) bottomDisplay.innerText = `${p1Name} turn`;
+    else bottomDisplay.innerText = `${p2Name} turn`;
+
     //  X vs O
     if ((Gameboard.p1 === 'Player X') && (Gameboard.p2 === 'Player O')) {
-
-        const p1Name = document.getElementById('player1').value;
-        const p2Name = document.getElementById('player2').value;
 
         const nextRound = function () {
             round++;

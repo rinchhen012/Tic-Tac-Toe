@@ -38,6 +38,23 @@ h1 {
   font-family: cursive;
 }
 
+#bottom {
+  height: 5rem;
+  width: 25rem;
+  color: rgb(206, 206, 206);
+  font-family: cursive;
+  font-size: 25px;
+  position: absolute;
+  bottom: 2%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #hidden {
   border-style: none;
   position: absolute;
