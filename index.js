@@ -6,6 +6,9 @@ let xTurn = true;
 //  top input field menu
 const inputMenu = document.querySelector('.name-input');
 
+//  div that hides the container
+const hidden = document.getElementById('hidden');
+
 const homeBtn = document.querySelector('.home-button');
 homeBtn.addEventListener('click', () => {
     inputMenu.style.visibility = "initial";
@@ -19,7 +22,8 @@ homeBtn.addEventListener('click', () => {
     boxes.forEach((box) => {
         box.innerText = '';
     });
-    scoreBoard.innerText = '';
+    scoreBoard.innerText = 'Score';
+    hidden.style.zIndex = 1;
     xTurn = true;
 });
 
@@ -35,6 +39,7 @@ startBtn.addEventListener('click', () => {
     }
     else {
         inputMenu.style.visibility = "hidden";
+        hidden.style.zIndex = -1;
     }
 });
 
@@ -77,53 +82,125 @@ const Gameboard = (function () {
     let p2 = playerSelect2.options[playerSelect2.selectedIndex].text;
 
     const winnerChecker = function (len) {
-        let strX,
-            strO;
+        let strX = [],
+            strO = [],
+            x = 0;
 
+        //  len is the length of array StrX or StrO
+        //  will add an algorithm in the future 
+        //  for now this messy amateur code will do 
+        //  sorry 
         if (len === 3) {
-            strX = Gameboard.gameBoardObj.gameBoardX[0] +
+            Gameboard.gameBoardObj.gameBoardO =
+                Gameboard.gameBoardObj.gameBoardO.sort((a, b) => a - b);
+            Gameboard.gameBoardObj.gameBoardX =
+                Gameboard.gameBoardObj.gameBoardX.sort((a, b) => a - b);
+
+            strX.push(Gameboard.gameBoardObj.gameBoardX[0] +
                 Gameboard.gameBoardObj.gameBoardX[1] +
-                Gameboard.gameBoardObj.gameBoardX[2];
-            strX = strX.split('').sort((a, b) => a - b).join('');
-            strO = Gameboard.gameBoardObj.gameBoardO[0] +
+                Gameboard.gameBoardObj.gameBoardX[2]);
+            strO.push(Gameboard.gameBoardObj.gameBoardO[0] +
                 Gameboard.gameBoardObj.gameBoardO[1] +
-                Gameboard.gameBoardObj.gameBoardO[2];
-            strO = strO.split('').sort((a, b) => a - b).join('');
+                Gameboard.gameBoardObj.gameBoardO[2]);
+            x = 1;
         }
+
         if (len === 4) {
-            strX = Gameboard.gameBoardObj.gameBoardX[1] +
+            Gameboard.gameBoardObj.gameBoardO =
+                Gameboard.gameBoardObj.gameBoardO.sort((a, b) => a - b);
+            Gameboard.gameBoardObj.gameBoardX =
+                Gameboard.gameBoardObj.gameBoardX.sort((a, b) => a - b);
+
+            strX.push(Gameboard.gameBoardObj.gameBoardX[0] +
+                Gameboard.gameBoardObj.gameBoardX[1] +
+                Gameboard.gameBoardObj.gameBoardX[2]);
+            strX.push(Gameboard.gameBoardObj.gameBoardX[0] +
                 Gameboard.gameBoardObj.gameBoardX[2] +
-                Gameboard.gameBoardObj.gameBoardX[3];
-            strX = strX.split('').sort((a, b) => a - b).join('');
-            strO = Gameboard.gameBoardObj.gameBoardO[1] +
+                Gameboard.gameBoardObj.gameBoardX[3]);
+            strX.push(Gameboard.gameBoardObj.gameBoardX[0] +
+                Gameboard.gameBoardObj.gameBoardX[1] +
+                Gameboard.gameBoardObj.gameBoardX[3]);
+            strX.push(Gameboard.gameBoardObj.gameBoardX[1] +
+                Gameboard.gameBoardObj.gameBoardX[2] +
+                Gameboard.gameBoardObj.gameBoardX[3]);
+
+            strO.push(Gameboard.gameBoardObj.gameBoardO[0] +
+                Gameboard.gameBoardObj.gameBoardO[1] +
+                Gameboard.gameBoardObj.gameBoardO[2]);
+            strO.push(Gameboard.gameBoardObj.gameBoardO[0] +
                 Gameboard.gameBoardObj.gameBoardO[2] +
-                Gameboard.gameBoardObj.gameBoardO[3];
-            strO = strO.split('').sort((a, b) => a - b).join('');
+                Gameboard.gameBoardObj.gameBoardO[3]);
+            strO.push(Gameboard.gameBoardObj.gameBoardO[0] +
+                Gameboard.gameBoardObj.gameBoardO[1] +
+                Gameboard.gameBoardObj.gameBoardO[3]);
+            strO.push(Gameboard.gameBoardObj.gameBoardO[1] +
+                Gameboard.gameBoardObj.gameBoardO[2] +
+                Gameboard.gameBoardObj.gameBoardO[3]);
+            x = 4;
         }
+
         if (len === 5) {
-            strX = Gameboard.gameBoardObj.gameBoardX[2] +
+            Gameboard.gameBoardObj.gameBoardO =
+                Gameboard.gameBoardObj.gameBoardO.sort((a, b) => a - b);
+            Gameboard.gameBoardObj.gameBoardX =
+                Gameboard.gameBoardObj.gameBoardX.sort((a, b) => a - b);
+
+            strX.push(Gameboard.gameBoardObj.gameBoardX[0] +
+                Gameboard.gameBoardObj.gameBoardX[1] +
+                Gameboard.gameBoardObj.gameBoardX[2]);
+            strX.push(Gameboard.gameBoardObj.gameBoardX[0] +
+                Gameboard.gameBoardObj.gameBoardX[1] +
+                Gameboard.gameBoardObj.gameBoardX[3]);
+            strX.push(Gameboard.gameBoardObj.gameBoardX[0] +
+                Gameboard.gameBoardObj.gameBoardX[1] +
+                Gameboard.gameBoardObj.gameBoardX[4]);
+            strX.push(Gameboard.gameBoardObj.gameBoardX[1] +
+                Gameboard.gameBoardObj.gameBoardX[2] +
+                Gameboard.gameBoardObj.gameBoardX[3]);
+            strX.push(Gameboard.gameBoardObj.gameBoardX[1] +
+                Gameboard.gameBoardObj.gameBoardX[2] +
+                Gameboard.gameBoardObj.gameBoardX[4]);
+            strX.push(Gameboard.gameBoardObj.gameBoardX[1] +
                 Gameboard.gameBoardObj.gameBoardX[3] +
-                Gameboard.gameBoardObj.gameBoardX[4];
-            strX = strX.split('').sort((a, b) => a - b).join('');
-            console.log(strX);
+                Gameboard.gameBoardObj.gameBoardX[4]);
+            strX.push(Gameboard.gameBoardObj.gameBoardX[2] +
+                Gameboard.gameBoardObj.gameBoardX[3] +
+                Gameboard.gameBoardObj.gameBoardX[4]);
+            strX.push(Gameboard.gameBoardObj.gameBoardX[0] +
+                Gameboard.gameBoardObj.gameBoardX[2] +
+                Gameboard.gameBoardObj.gameBoardX[3]);
+            strX.push(Gameboard.gameBoardObj.gameBoardX[0] +
+                Gameboard.gameBoardObj.gameBoardX[2] +
+                Gameboard.gameBoardObj.gameBoardX[4]);
+            strX.push(Gameboard.gameBoardObj.gameBoardX[0] +
+                Gameboard.gameBoardObj.gameBoardX[3] +
+                Gameboard.gameBoardObj.gameBoardX[4]);
+            x = 5;
         }
 
-        //  loop to check if win pattern matches
-        for (let i = 0; i <= 7; i++) {
-            if (strX === winPattern[i])
-                return 'x';
-            if (strO === winPattern[i])
-                return 'o';
+        //  loop to check if an item in array  
+        //  StrX matches any item in win pattern obj
+        for (let j = 0; j < x; j++) {
+            for (let i = 0; i <= 7; i++) {
+                if (strX[j] === winPattern[i]) {
+                    strX = [];
+                    return 'x';
+                }
+                if (strO[j] === winPattern[i]) {
+                    strO = [];
+                    return 'o';
+                }
+            }
         }
 
-        if (len === 5 && strX === undefined) return 'tie';
+        if (len === 5) return 'tie';
     };
 
     return {
         gameBoardObj,
         p1,
         p2,
-        winnerChecker
+        winnerChecker,
     };
 })();
 
@@ -131,10 +208,32 @@ const PlayerVsPlayer = function () {
     let strike,
         xCounter = 0,
         oCounter = 0,
-        tieCounter = 0;
+        tieCounter = 0,
+        round = 1;
 
     //  X vs O
     if ((Gameboard.p1 === 'Player X') && (Gameboard.p2 === 'Player O')) {
+
+        const p1Name = document.getElementById('player1').value;
+        const p2Name = document.getElementById('player2').value;
+
+        const nextRound = function () {
+            round++;
+            inputMenu.style.visibility = "initial";
+            Gameboard.gameBoardObj.gameBoardX = [];
+            Gameboard.gameBoardObj.gameBoardO = [];
+            Gameboard.gameBoardObj.round = 0;
+            boxes.forEach((box) => {
+                box.innerText = '';
+            });
+            scoreBoard.innerText =
+                `Score
+             Round : ${round}
+            ${p1Name} : ${xCounter}
+            ${p2Name} : ${oCounter}
+            Tie : ${tieCounter}`;
+            xTurn = true;
+        }
 
         if (Gameboard.gameBoardObj.gameBoardX.length === 3 ||
             Gameboard.gameBoardObj.gameBoardO.length === 3)
@@ -148,29 +247,20 @@ const PlayerVsPlayer = function () {
         //  if X wins 
         if (strike === 'x') {
             xCounter++;
-            scoreBoard.innerText =
-                `Score
-            ${Gameboard.p1} : ${xCounter}
-            ${Gameboard.p2} : ${oCounter}
-            Tie : ${tieCounter}`;
+            alert(`Congrats! ${p1Name} wins`);
+            nextRound();
         }
         //  if O wins
         if (strike === 'o') {
             oCounter++;
-            scoreBoard.innerText =
-                `Score
-            ${Gameboard.p1} : ${xCounter}
-            ${Gameboard.p2} : ${oCounter}
-            Tie : ${tieCounter}`;
+            alert(`Congrats! ${p2Name} wins`);
+            nextRound();
         }
         //  if tie
         if (strike === 'tie') {
             tieCounter++;
-            scoreBoard.innerText =
-                `Score
-            ${Gameboard.p1} : ${xCounter}
-            ${Gameboard.p2} : ${oCounter}
-            Tie : ${tieCounter}`;
+            alert('Tie! Try better dumbos');
+            nextRound();
         }
     };
 
@@ -185,6 +275,13 @@ const PlayerVsPlayer = function () {
         || Gameboard.p2 === 'Alpha AI')) || ((Gameboard.p1 === 'Beta AI'
             || Gameboard.p1 === 'Alpha AI') && (Gameboard.p2 === 'Player O'))) {
         console.log('Player vs AI');
+    }
+
+    //  Best of 3
+    if (round === 3) {
+        alert('Best of 3');
+        hidden.style.zIndex = 1;
+        homeBtn.click();
     }
 };
 
