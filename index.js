@@ -3,6 +3,11 @@
 //  player turn starting from player X
 let xTurn = true;
 
+let xCounter = 0,
+    oCounter = 0,
+    tieCounter = 0,
+    round = 1;
+
 //  top input field menu
 const inputMenu = document.querySelector('.name-input');
 
@@ -210,11 +215,7 @@ const Gameboard = (function () {
 })();
 
 const PlayerVsPlayer = function () {
-    let strike,
-        xCounter = 0,
-        oCounter = 0,
-        tieCounter = 0,
-        round = 1;
+    let strike;
 
     const p1Name = document.getElementById('player1').value;
     const p2Name = document.getElementById('player2').value;
@@ -286,7 +287,7 @@ const PlayerVsPlayer = function () {
     }
 
     //  Best of 3
-    if (round === 3) {
+    if (round > 3) {
         alert('Best of 3');
         hidden.style.zIndex = 1;
         homeBtn.click();
