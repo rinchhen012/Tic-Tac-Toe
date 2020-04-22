@@ -34,6 +34,10 @@ homeBtn.addEventListener('click', () => {
     hidden.style.zIndex = 1;
     xTurn = true;
     bottomDisplay.innerText = '';
+    xCounter = 0;
+    oCounter = 0;
+    tieCounter = 0;
+    round = 1;
 });
 
 const startBtn = document.querySelector('.start-button');
@@ -79,10 +83,11 @@ const Gameboard = (function () {
         '7': '246',
     }
 
+    const gameBoardAreas = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
     const gameBoardObj = {
         gameBoardX: [],
         gameBoardO: [],
-        round: 0,
     };
 
     //  player selection from select dropdown list
@@ -208,6 +213,7 @@ const Gameboard = (function () {
 
     return {
         gameBoardObj,
+        gameBoardAreas,
         p1,
         p2,
         winnerChecker,
@@ -229,7 +235,6 @@ const PlayerVsPlayer = function () {
         inputMenu.style.visibility = "initial";
         Gameboard.gameBoardObj.gameBoardX = [];
         Gameboard.gameBoardObj.gameBoardO = [];
-        Gameboard.gameBoardObj.round = 0;
         boxes.forEach((box) => {
             box.innerText = '';
         });
@@ -243,36 +248,36 @@ const PlayerVsPlayer = function () {
     }
 
     //  X vs O
-    if ((Gameboard.p1 === 'Player X') && (Gameboard.p2 === 'Player O')) {
+    // if ((Gameboard.p1 === 'Player X') && (Gameboard.p2 === 'Player O')) {
 
-        if (Gameboard.gameBoardObj.gameBoardX.length === 3 ||
-            Gameboard.gameBoardObj.gameBoardO.length === 3)
-            strike = Gameboard.winnerChecker(3);
-        if (Gameboard.gameBoardObj.gameBoardX.length === 4 ||
-            Gameboard.gameBoardObj.gameBoardO.length === 4)
-            strike = Gameboard.winnerChecker(4);
-        if (Gameboard.gameBoardObj.gameBoardX.length === 5)
-            strike = Gameboard.winnerChecker(5);
+    if (Gameboard.gameBoardObj.gameBoardX.length === 3 ||
+        Gameboard.gameBoardObj.gameBoardO.length === 3)
+        strike = Gameboard.winnerChecker(3);
+    if (Gameboard.gameBoardObj.gameBoardX.length === 4 ||
+        Gameboard.gameBoardObj.gameBoardO.length === 4)
+        strike = Gameboard.winnerChecker(4);
+    if (Gameboard.gameBoardObj.gameBoardX.length === 5)
+        strike = Gameboard.winnerChecker(5);
 
-        //  if X wins 
-        if (strike === 'x') {
-            xCounter++;
-            alert(`Congrats! ${p1Name} wins`);
-            nextRound();
-        }
-        //  if O wins
-        if (strike === 'o') {
-            oCounter++;
-            alert(`Congrats! ${p2Name} wins`);
-            nextRound();
-        }
-        //  if tie
-        if (strike === 'tie') {
-            tieCounter++;
-            alert('Tie! Try better dumbos');
-            nextRound();
-        }
-    };
+    //  if X wins 
+    if (strike === 'x') {
+        xCounter++;
+        alert(`Congrats! ${p1Name} wins`);
+        nextRound();
+    }
+    //  if O wins
+    if (strike === 'o') {
+        oCounter++;
+        alert(`Congrats! ${p2Name} wins`);
+        nextRound();
+    }
+    //  if tie
+    if (strike === 'tie') {
+        tieCounter++;
+        alert('Tie! Try better dumbos');
+        nextRound();
+    }
+    // };
 
     //  AI vs AI
     if ((Gameboard.p1 === 'Beta AI' || Gameboard.p1 === 'Alpha AI') &&
@@ -281,11 +286,15 @@ const PlayerVsPlayer = function () {
     }
 
     //  Player vs AI
-    if (((Gameboard.p1 === 'Player X') && (Gameboard.p2 === 'Beta AI'
-        || Gameboard.p2 === 'Alpha AI')) || ((Gameboard.p1 === 'Beta AI'
-            || Gameboard.p1 === 'Alpha AI') && (Gameboard.p2 === 'Player O'))) {
-        console.log('Player vs AI');
+    // if (((Gameboard.p1 === 'Player X') && (Gameboard.p2 === 'Beta AI'
+    //     || Gameboard.p2 === 'Alpha AI')) || ((Gameboard.p1 === 'Beta AI'
+    //         || Gameboard.p1 === 'Alpha AI') && (Gameboard.p2 === 'Player O'))) {
+
+    //  if Player O is AI
+    if (Gameboard.p2 === 'Beta AI') {
+        betaAi();
     }
+    // }
 
     //  Best of 3
     if (round > 3) {
@@ -312,6 +321,27 @@ const Render = function (box, PlayerChoice) {
             box.innerText = 'O';
             xTurn = true;
         }
+    }
+};
+
+const betaAi = function () {
+    if (!xTurn) {
+        let i = 0;
+        let value = Gameboard.gameBoardObj.gameBoardX[i];
+        Gameboard.gameBoardAreas =
+            Gameboard.gameBoardAreas.filter(item => item !== value);
+        console.log(Gameboard.gameBoardAreas)
+        //   random choice for Beta AI
+        let betaAiChoice =
+            Gameboard.gameBoardAreas[Math.floor(Math.random() *
+                Gameboard.gameBoardAreas.length)];
+        boxes.forEach(box => {
+            if (box.dataset.number == betaAiChoice) {
+                alert('hello')
+                box.click();
+            }
+        });
+        i++;
     }
 };
 
