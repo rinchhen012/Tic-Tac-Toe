@@ -214,6 +214,7 @@ const Gameboard = (function () {
     };
 })();
 
+
 const PlayerVsPlayer = function () {
     let strike;
 
@@ -223,26 +224,26 @@ const PlayerVsPlayer = function () {
     if (xTurn) bottomDisplay.innerText = `${p1Name} turn`;
     else bottomDisplay.innerText = `${p2Name} turn`;
 
+    const nextRound = function () {
+        round++;
+        inputMenu.style.visibility = "initial";
+        Gameboard.gameBoardObj.gameBoardX = [];
+        Gameboard.gameBoardObj.gameBoardO = [];
+        Gameboard.gameBoardObj.round = 0;
+        boxes.forEach((box) => {
+            box.innerText = '';
+        });
+        scoreBoard.innerText =
+            `Score
+         Round : ${round}
+        ${p1Name} : ${xCounter}
+        ${p2Name} : ${oCounter}
+        Tie : ${tieCounter}`;
+        xTurn = true;
+    }
+
     //  X vs O
     if ((Gameboard.p1 === 'Player X') && (Gameboard.p2 === 'Player O')) {
-
-        const nextRound = function () {
-            round++;
-            inputMenu.style.visibility = "initial";
-            Gameboard.gameBoardObj.gameBoardX = [];
-            Gameboard.gameBoardObj.gameBoardO = [];
-            Gameboard.gameBoardObj.round = 0;
-            boxes.forEach((box) => {
-                box.innerText = '';
-            });
-            scoreBoard.innerText =
-                `Score
-             Round : ${round}
-            ${p1Name} : ${xCounter}
-            ${p2Name} : ${oCounter}
-            Tie : ${tieCounter}`;
-            xTurn = true;
-        }
 
         if (Gameboard.gameBoardObj.gameBoardX.length === 3 ||
             Gameboard.gameBoardObj.gameBoardO.length === 3)
@@ -288,7 +289,11 @@ const PlayerVsPlayer = function () {
 
     //  Best of 3
     if (round > 3) {
-        alert('Best of 3');
+        if (xCounter > oCounter)
+            alert(`${p1Name} wins Best of 3`);
+        else if (xCounter == oCounter == tieCounter)
+            alert('TIE DUMBOS');
+        else alert(`${p2Name} wins Best of 3`);
         hidden.style.zIndex = 1;
         homeBtn.click();
     }
