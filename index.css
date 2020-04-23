@@ -76,7 +76,9 @@ h1 {
 .box {
   border: 3px solid rgb(134, 134, 134);
   font-size: 80px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: #c86161;
 }
 

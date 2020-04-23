@@ -6,7 +6,9 @@ let xTurn = true;
 let xCounter = 0,
     oCounter = 0,
     tieCounter = 0,
-    round = 1;
+    round = 1,
+    p1,
+    p2;
 
 //  top input field menu
 const inputMenu = document.querySelector('.name-input');
@@ -26,7 +28,7 @@ homeBtn.addEventListener('click', () => {
 
     Gameboard.gameBoardObj.gameBoardX = [];
     Gameboard.gameBoardObj.gameBoardO = [];
-    Gameboard.gameBoardObj.round = 0;
+    Gameboard.gameBoardAreas = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     boxes.forEach((box) => {
         box.innerText = '';
     });
@@ -38,6 +40,8 @@ homeBtn.addEventListener('click', () => {
     oCounter = 0;
     tieCounter = 0;
     round = 1;
+    p1 = '';
+    p2 = '';
 });
 
 const startBtn = document.querySelector('.start-button');
@@ -45,6 +49,12 @@ startBtn.addEventListener('click', () => {
     //  player names from input field
     const p1Name = document.getElementById('player1').value;
     const p2Name = document.getElementById('player2').value;
+
+    //  player selection value
+    const playerSelect1 = document.getElementById('player-select1');
+    const playerSelect2 = document.getElementById('player-select2');
+    const pOne = playerSelect1.options[playerSelect1.selectedIndex].value;
+    const pTwo = playerSelect2.options[playerSelect2.selectedIndex].value;
 
     //  making sure players names are entered
     if (p1Name === '' || p2Name === '' || p1Name === p2Name) {
@@ -54,6 +64,8 @@ startBtn.addEventListener('click', () => {
         bottomDisplay.innerText = `${p1Name} turn`;
         inputMenu.style.visibility = "hidden";
         hidden.style.zIndex = -1;
+        p1 = pOne;
+        p2 = pTwo;
     }
 });
 
@@ -65,6 +77,10 @@ const boxes = document.querySelectorAll(".box");
 boxes.forEach((box) => {
     box.addEventListener('click', () => {
         let playerChoice = box.dataset.number;
+        if (xTurn) {
+            let index = Gameboard.gameBoardAreas.indexOf(playerChoice);
+            Gameboard.gameBoardAreas.splice(index, 1);
+        }
         Render(box, playerChoice);
         PlayerVsPlayer();
     });
@@ -89,12 +105,6 @@ const Gameboard = (function () {
         gameBoardX: [],
         gameBoardO: [],
     };
-
-    //  player selection from select dropdown list
-    let playerSelect1 = document.getElementById('player-select1');
-    let playerSelect2 = document.getElementById('player-select2');
-    let p1 = playerSelect1.options[playerSelect1.selectedIndex].text;
-    let p2 = playerSelect2.options[playerSelect2.selectedIndex].text;
 
     const winnerChecker = function (len) {
         let strX = [],
@@ -214,8 +224,6 @@ const Gameboard = (function () {
     return {
         gameBoardObj,
         gameBoardAreas,
-        p1,
-        p2,
         winnerChecker,
     };
 })();
@@ -232,9 +240,9 @@ const PlayerVsPlayer = function () {
 
     const nextRound = function () {
         round++;
-        inputMenu.style.visibility = "initial";
         Gameboard.gameBoardObj.gameBoardX = [];
         Gameboard.gameBoardObj.gameBoardO = [];
+        Gameboard.gameBoardAreas = [0, 1, 2, 3, 4, 5, 6, 7, 8];
         boxes.forEach((box) => {
             box.innerText = '';
         });
@@ -277,24 +285,16 @@ const PlayerVsPlayer = function () {
         alert('Tie! Try better dumbos');
         nextRound();
     }
-    // };
 
     //  AI vs AI
-    if ((Gameboard.p1 === 'Beta AI' || Gameboard.p1 === 'Alpha AI') &&
-        (Gameboard.p2 === 'Beta AI' || Gameboard.p2 === 'Alpha AI')) {
-        AiBattle(Gameboard.p1, Gameboard.p2);
+    if ((p1 === 'Beta AI' || p1 === 'Alpha AI') &&
+        (p2 === 'Beta AI' || p2 === 'Alpha AI')) {
+        AiBattle(p1, p2);
     }
-
-    //  Player vs AI
-    // if (((Gameboard.p1 === 'Player X') && (Gameboard.p2 === 'Beta AI'
-    //     || Gameboard.p2 === 'Alpha AI')) || ((Gameboard.p1 === 'Beta AI'
-    //         || Gameboard.p1 === 'Alpha AI') && (Gameboard.p2 === 'Player O'))) {
 
     //  if Player O is AI
-    if (Gameboard.p2 === 'Beta AI') {
+    if (p2 === 'Beta AI')
         betaAi();
-    }
-    // }
 
     //  Best of 3
     if (round > 3) {
@@ -325,23 +325,19 @@ const Render = function (box, PlayerChoice) {
 };
 
 const betaAi = function () {
+    let betaAiChoice;
     if (!xTurn) {
-        let i = 0;
-        let value = Gameboard.gameBoardObj.gameBoardX[i];
-        Gameboard.gameBoardAreas =
-            Gameboard.gameBoardAreas.filter(item => item !== value);
-        console.log(Gameboard.gameBoardAreas)
         //   random choice for Beta AI
-        let betaAiChoice =
+        betaAiChoice =
             Gameboard.gameBoardAreas[Math.floor(Math.random() *
                 Gameboard.gameBoardAreas.length)];
         boxes.forEach(box => {
             if (box.dataset.number == betaAiChoice) {
-                alert('hello')
                 box.click();
             }
         });
-        i++;
+        let index = Gameboard.gameBoardAreas.indexOf(betaAiChoice);
+        Gameboard.gameBoardAreas.splice(index, 1);
     }
 };
 
